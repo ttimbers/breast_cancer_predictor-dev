@@ -5,17 +5,23 @@
 # Writes the training and test data to separate feather files.
 #
 # Example:
-# Rscript pre_process_wisc.r --input=data/raw/wdbc.feather --out_dir=data/processed 
+# Rscript src/pre_process_wisc.r --input=data/raw/wdbc.feather --out_dir=data/processed 
 
 library(feather)
 library(tidyverse)
 library(caret)
+library(optparse)
+set.seed(2017)
 
 main <- function(){
-  input <- "data/raw/wdbc.feather"
-  out_dir <- "data/processed"
-  
-  set.seed(2017)
+  option_list <- list(
+    make_option("--input", type = "character"),
+    make_option("--out_dir", type = "character"))
+  opt <- parse_args(OptionParser(option_list = option_list))
+  input <- opt$input
+  out_dir <- opt$out_dir
+  #input <- "data/raw/wdbc.feather"
+  #out_dir <- "data/processed"
   
   # read data and convert class to factor
   raw_data <- read_bc_data(input) %>% 
@@ -52,8 +58,6 @@ main <- function(){
   write_feather(training_scaled, paste0(out_dir, "/training.feather"))
   write_feather(test_scaled, paste0(out_dir, "/test.feather"))
 }
-
-
 
 read_bc_data <- function(path, file_type = "feather") {
   if (file_type == "feather") {

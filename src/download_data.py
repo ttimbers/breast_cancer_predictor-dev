@@ -18,7 +18,6 @@ def main():
   parser.add_argument("--url")
   parser.add_argument("--out_file")
   args = parser.parse_args()
-
   out_type = args.out_type
   url = args.url
   out_file = args.out_file
