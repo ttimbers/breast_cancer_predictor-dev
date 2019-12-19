@@ -20,9 +20,6 @@ def main():
   parser.add_argument("--path")
   args = parser.parse_args()
 
-  # out = "feather"
-  # url = "http://mlr.cs.umass.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"
-  # path = "data/raw/wdbc.feather"
   out = args.out
   url = args.url
   path = args.path
