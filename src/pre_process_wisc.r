@@ -1,26 +1,31 @@
 # author: Tiffany Timbers
 # date: 2019-12-18
-#
-# Cleans, splits and pre-processes (scales) the Wisconsin breast cancer data (from http://mlr.cs.umass.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data)
-# Writes the training and test data to separate feather files.
-#
-# Example:
-# Rscript src/pre_process_wisc.r --input=data/raw/wdbc.feather --out_dir=data/processed 
+
+"Cleans, splits and pre-processes (scales) the Wisconsin breast cancer data (from http://mlr.cs.umass.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data).
+Writes the training and test data to separate feather files.
+
+Usage: src/pre_process_wisc.r --input=<input> --out_dir=<out_dir>
+  
+Options:
+--input=<input>       Path (including filename) to raw data (feather file)
+--out_dir=<out_dir>   Path to directory where the processed data should be written
+" -> doc
 
 library(feather)
 library(tidyverse)
 library(caret)
-library(optparse)
+library(docopt)
 set.seed(2017)
 
-main <- function(){
-  option_list <- list(
-    make_option("--input", type = "character"),
-    make_option("--out_dir", type = "character"))
-  opt <- parse_args(OptionParser(option_list = option_list))
-  input <- opt$input
-  out_dir <- opt$out_dir
-  #input <- "data/raw/wdbc.feather"
+opt <- docopt(doc)
+main <- function(input, out_dir){
+  # option_list <- list(
+  #   make_option("--input", type = "character"),
+  #   make_option("--out_dir", type = "character"))
+  # opt <- parse_args(OptionParser(option_list = option_list))
+  # input <- opt$input
+  # out_dir <- opt$out_dir
+  # #input <- "data/raw/wdbc.feather"
   #out_dir <- "data/processed"
   
   # read data and convert class to factor
@@ -81,4 +86,4 @@ read_bc_data <- function(path, file_type = "feather") {
   data
 }
 
-main()
+main(opt[["--input"]], opt[["--out_dir"]])
