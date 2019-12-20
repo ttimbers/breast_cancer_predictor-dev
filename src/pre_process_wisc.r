@@ -19,15 +19,6 @@ set.seed(2017)
 
 opt <- docopt(doc)
 main <- function(input, out_dir){
-  # option_list <- list(
-  #   make_option("--input", type = "character"),
-  #   make_option("--out_dir", type = "character"))
-  # opt <- parse_args(OptionParser(option_list = option_list))
-  # input <- opt$input
-  # out_dir <- opt$out_dir
-  # #input <- "data/raw/wdbc.feather"
-  #out_dir <- "data/processed"
-  
   # read data and convert class to factor
   raw_data <- read_bc_data(input) %>% 
     mutate(class = as.factor(class))
