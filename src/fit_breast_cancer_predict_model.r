@@ -19,8 +19,6 @@ set.seed(2020)
 
 opt <- docopt(doc)
 
-train <- "data/processed/training.feather"
-
 main <- function(train, out_dir) {
   train_data <- read_feather(train) %>% 
     select(-id)
