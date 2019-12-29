@@ -15,7 +15,7 @@ library(feather)
 library(tidyverse)
 library(caret)
 library(docopt)
-set.seed(2017)
+set.seed(2020)
 
 opt <- docopt(doc)
 main <- function(input, out_dir){

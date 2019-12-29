@@ -1,7 +1,7 @@
 # breast cancer data pipe
 # WORK IN PROGRESS
 
-all: data/processed/training.feather data/processed/test.feather scale_factor.rds
+all: results/final_model.rds
 
 # download data
 data/raw/wdbc.feather: src/download_data.py
@@ -11,6 +11,11 @@ data/raw/wdbc.feather: src/download_data.py
 data/processed/training.feather data/processed/test.feather scale_factor.rds: src/pre_process_wisc.r data/raw/wdbc.feather
 	Rscript src/pre_process_wisc.r --input=data/raw/wdbc.feather --out_dir=data/processed 
 
+# tune model
+results/final_model.rds: src/fit_breast_cancer_predict_model.r data/processed/training.feather
+	Rscript src/fit_breast_cancer_predict_model.r --train=data/processed/training.feather --out_dir=results
+
 clean: 
 	rm -rf data
+	rm -rf results
 			

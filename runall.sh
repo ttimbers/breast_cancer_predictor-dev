@@ -6,3 +6,6 @@ python src/download_data.py --out_type=feather --url=http://mlr.cs.umass.edu/ml/
 
 # pre-process data 
 Rscript src/pre_process_wisc.r --input=data/raw/wdbc.feather --out_dir=data/processed 
+
+# tune model
+Rscript src/fit_breast_cancer_predict_model.r --train=data/processed/training.feather --out_dir=results
