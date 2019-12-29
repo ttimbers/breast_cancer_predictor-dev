@@ -22,7 +22,12 @@ opt <- docopt(doc)
 main <- function(train, out_dir) {
   train_data <- read_feather(train) %>% 
     gather(key = predictor, value = value, -class) %>% 
-    ggplot(aes(x = value)) +
-      geom_histogram()
+    ggplot(aes(x = value, fill = class)) +
+      geom_histogram() +
+      facet_wrap(. ~ predictor, nrow = 5)
+  ggsave(paste0(out_dir, "/predictor_distributions_across_class.png"), 
+         train_data,
+         width = 6, 
+         height = 8)
 }
 main(opt[["--train"]], opt[["--out_dir"]])

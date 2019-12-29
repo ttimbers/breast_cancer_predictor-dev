@@ -21,6 +21,7 @@ opt <- docopt(doc)
 main <- function(input, out_dir){
   # read data and convert class to factor
   raw_data <- read_bc_data(input) %>% 
+    select(-id) %>% 
     mutate(class = as.factor(class))
   
   # split into training and test data sets

@@ -20,26 +20,37 @@ set.seed(2020)
 opt <- docopt(doc)
 
 main <- function(train, out_dir) {
-  train_data <- read_feather(train) %>% 
-    select(-id)
+
+  # Tune hyperparameters ----------------------------------------------------
+
+  train_data <- read_feather(train) 
   x_train <- train_data %>% 
     select(-class)
   y_train <- train_data %>% 
     select(class) %>% 
     mutate(class = as.factor(class)) %>% 
     pull()
-  k = data.frame(k = seq(1, 50, by = 2))
+  k = data.frame(k = seq(1, 200, by = 2))
   cross_val <- trainControl(method="cv", number = 10)
   model_cv_10fold <- train(x = x_train, y = y_train, method = "knn", tuneGrid = k, trControl = cross_val)
+  
+  # Visualize accuracy for K's ----------------------------------------------
+
+  accuracy_vs_k <- model_cv_10fold$results %>% 
+    ggplot(aes(x = k, y = Accuracy)) +
+      geom_point() +
+      xlab("10-fold cross-validation accuracy")
+  try({
+    dir.create(out_dir)
+  })
+  ggsave(paste0(out_dir, "/accuracy_vs_k.png"), width = 4, height = 4)
+  
+  # Fit final model ---------------------------------------------------------
   best_k <- model_cv_10fold$result %>% 
     filter(Accuracy == max(Accuracy)) %>% 
     select(k) %>% 
     pull()
   final_model <- train(x = x_train, y = y_train, method = "knn", tuneGrid = data.frame(k = best_k))
-  # write scale factor to a file
-  try({
-    dir.create(out_dir)
-  })
   saveRDS(final_model, file = paste0(out_dir, "/final_model.rds"))
 }
   
