@@ -1,26 +1,26 @@
 # author: Tiffany Timbers
 # date: 2019-12-18
-#
-# Downloads data csv data from the web to a local filepath as either a csv or feather file format.
-#
-# Example
-# python src/download_data.py --out_type=feather --url=http://mlr.cs.umass.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data --out_file=data/raw/wdbc.feather
 
-import argparse
+"""Downloads data csv data from the web to a local filepath as either a csv or feather file format.
+
+Usage: src/down_data.py --out_type=<out_type> --url=<url> --out_file=<out_file>
+
+Options:
+--out_type=<out_type>    Type of file to write locally (script supports either feather or csv)
+--url=<url>              URL from where to download the data (must be in standard csv format)
+--out_file=<out_file>    Path (including filename) of where to locally write the file
+"""
+  
+from docopt import docopt
 import os
-import re
 import pandas as pd
 import feather
 
-def main():
-  parser = argparse.ArgumentParser()
-  parser.add_argument("--out_type")
-  parser.add_argument("--url")
-  parser.add_argument("--out_file")
-  args = parser.parse_args()
-  out_type = args.out_type
-  url = args.url
-  out_file = args.out_file
+arguments = docopt(__doc__)
+
+print(arguments)
+
+def main(out_type, url, out_file):
   
   data = pd.read_csv(url, header=None)
   
@@ -38,4 +38,4 @@ def main():
       feather.write_dataframe(data, out_file)
 
 if __name__ == "__main__":
-  main()
+  main(arguments["--out_type"], arguments["--url"], arguments["--out_file"])
