@@ -9,3 +9,6 @@ Rscript src/pre_process_wisc.r --input=data/raw/wdbc.feather --out_dir=data/proc
 
 # tune model
 Rscript src/fit_breast_cancer_predict_model.r --train=data/processed/training.feather --out_dir=results
+
+# test model
+Rscript src/breast_cancer_test_results.r --test=data/processed/test.feather --out_dir=results

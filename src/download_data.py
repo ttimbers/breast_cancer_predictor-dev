@@ -16,9 +16,7 @@ import os
 import pandas as pd
 import feather
 
-arguments = docopt(__doc__)
-
-print(arguments)
+opt = docopt(__doc__)
 
 def main(out_type, url, out_file):
   
@@ -38,4 +36,4 @@ def main(out_type, url, out_file):
       feather.write_dataframe(data, out_file)
 
 if __name__ == "__main__":
-  main(arguments["--out_type"], arguments["--url"], arguments["--out_file"])
+  main(opt["--out_type"], opt["--url"], opt["--out_file"])

@@ -1,7 +1,7 @@
 # breast cancer data pipe
 # WORK IN PROGRESS
 
-all: results/final_model.rds results/accuracy_vs_k.png results/predictor_distributions_across_class.png
+all: results/final_model.rds results/accuracy_vs_k.png results/predictor_distributions_across_class.png results/final_model_quality.rds
 
 # download data
 data/raw/wdbc.feather: src/download_data.py
@@ -20,6 +20,8 @@ results/final_model.rds results/accuracy_vs_k.png: src/fit_breast_cancer_predict
 	Rscript src/fit_breast_cancer_predict_model.r --train=data/processed/training.feather --out_dir=results
 
 # test model
+results/final_model_quality.rds: src/breast_cancer_test_results.r data/processed/test.feather
+	Rscript src/breast_cancer_test_results.r --test=data/processed/test.feather --out_dir=results
 
 # render report
 

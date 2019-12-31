@@ -42,7 +42,7 @@ main <- function(input, out_dir){
   x_test_scaled <- predict(pre_process_scaler, x_test)
   training_scaled <- x_train_scaled %>% 
     mutate(class = training_data %>% select(class) %>% pull())
-  test_scaled <- x_test %>% 
+  test_scaled <- x_test_scaled %>% 
     mutate(class = test_data %>% select(class) %>% pull())
   
   # write scale factor to a file
