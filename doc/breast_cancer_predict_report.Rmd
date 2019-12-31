@@ -1,0 +1,28 @@
+---
+title: "Predicting breast cancer from digitized images of breast mass"
+author: "Tiffany A. Timbers </br>"
+date: "2019/12/30 (updated: `r Sys.Date()`)"
+output: 
+  github_document:
+    toc: true
+bibliography: breast_cancer_references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(caret)
+```
+
+# Summary
+
+# Introduction
+
+# Methods
+
+Data was sourced from @Dua2019.
+
+# Results & Discussion
+
+# References
+
