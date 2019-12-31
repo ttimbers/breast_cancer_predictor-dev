@@ -1,7 +1,7 @@
 # breast cancer data pipe
 # WORK IN PROGRESS
 
-all: results/final_model.rds results/accuracy_vs_k.png results/predictor_distributions_across_class.png results/final_model_quality.rds
+all: results/final_model.rds results/accuracy_vs_k.png results/predictor_distributions_across_class.png results/final_model_quality.rds doc/breast_cancer_predict_report.md
 
 # download data
 data/raw/wdbc.feather: src/download_data.py
@@ -24,8 +24,11 @@ results/final_model_quality.rds: src/breast_cancer_test_results.r data/processed
 	Rscript src/breast_cancer_test_results.r --test=data/processed/test.feather --out_dir=results
 
 # render report
+doc/breast_cancer_predict_report.md: doc/breast_cancer_predict_report.Rmd doc/breast_cancer_references.bib
+	Rscript -e "rmarkdown::render('doc/breast_cancer_predict_report.Rmd', output_format = 'github_document')"
 
 clean: 
 	rm -rf data
 	rm -rf results
+	rm -rf doc/breast_cancer_predict_report.md
 			
