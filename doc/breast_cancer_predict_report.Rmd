@@ -20,7 +20,7 @@ library(caret)
 
 # Methods
 
-Data was sourced from @Dua2019.
+The data used to train and test the breast cancer predictive model was sourced from the UCI Machine Learning Repository [@Dua2019] and can be found [here](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)). The R and Python programming languages [@R; @Python] and the following R and Python packages were used to perform the analysis: caret [@caret], docopt [@docopt], feather [@feather], knitr [@knitr], tidyverse [@tidyverse], docopt [@docoptpython], os [@os], feather [@feather] Pandas [@mckinney-proc-scipy-2010]. The code used to create this report can be found here: https://github.com/ttimbers/breast_cancer_predictor.
 
 # Results & Discussion
 
