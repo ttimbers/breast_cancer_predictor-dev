@@ -1,7 +1,7 @@
 Predicting breast cancer from digitized images of breast mass
 ================
 Tiffany A. Timbers </br>
-2019/12/30 (updated: 2020-01-02)
+2019/12/30 (updated: 2020-01-06)
 
 # Summary
 
@@ -9,16 +9,41 @@ Tiffany A. Timbers </br>
 
 # Methods
 
+## Data
+
 The data used to train and test the breast cancer predictive model was
 sourced from the UCI Machine Learning Repository (Dua and Graff 2017)
 and can be found
 [here](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+\(Diagnostic\)).
-The R and Python programming languages (R Core Team 2019; Van Rossum and
-Drake 2009) and the following R and Python packages were used to perform
-the analysis: caret (Jed Wing et al. 2019), docopt (de Jonge 2018),
-feather (Wickham 2019), knitr (Xie 2014), tidyverse (Wickham 2017),
-docopt (Keleshev 2014), Pandas (McKinney 2010). The code used to create
-this report can be found here:
+Only the following 10 variables were used in the analysis:
+
+  - area
+  - class
+  - compactness
+  - concave\_points
+  - concavity
+  - fractal\_dimension
+  - perimeter
+  - radius
+  - smoothness
+  - symmetry
+  - texture"
+
+## Analysis
+
+The k-nearest neighbors (k-nn) algorithm was used to build a
+classification model to predict whether a tumour mass was benign or
+malignant (found in the class column of the data set). The remaining 9
+variables listed above were used as predictors in the model. The
+hyperparameter \(K\) was chosen using 10-fold cross validation with
+overall classification accuracy as the loss function. The R and Python
+programming languages (R Core Team 2019; Van Rossum and Drake 2009) and
+the following R and Python packages were used to perform the analysis:
+caret (Jed Wing et al. 2019), docopt (de Jonge 2018), feather (Wickham
+2019), knitr (Xie 2014), tidyverse (Wickham 2017), docopt (Keleshev
+2014), os (Van Rossum and Drake 2009), feather (Wickham 2019) Pandas
+(McKinney 2010). The code used to perform the analysis and create this
+report can be found here:
 <https://github.com/ttimbers/breast_cancer_predictor>.
 
 # Results & Discussion
