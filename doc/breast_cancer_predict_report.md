@@ -1,7 +1,7 @@
 Predicting breast cancer from digitized images of breast mass
 ================
 Tiffany A. Timbers </br>
-2019/12/30 (updated: 2020-01-06)
+2019/12/30 (updated: 2020-01-07)
 
 # Summary
 
@@ -14,20 +14,22 @@ Tiffany A. Timbers </br>
 The data used to train and test the breast cancer predictive model was
 sourced from the UCI Machine Learning Repository (Dua and Graff 2017)
 and can be found
-[here](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+\(Diagnostic\)).
-Only the following 10 variables were used in the analysis:
+[here](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+\(Diagnostic\)),
+specifically [this
+file](http://mlr.cs.umass.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data).
+Only the following 11 variables were used in the analysis:
 
-  - area
   - class
-  - compactness
-  - concave\_points
-  - concavity
-  - fractal\_dimension
-  - perimeter
-  - radius
-  - smoothness
-  - symmetry
-  - texture"
+  - maximum area
+  - maximum compactness
+  - maximum concave\_points
+  - maximum concavity
+  - maximum fractal\_dimension
+  - maximum perimeter
+  - maximum radius
+  - maximum smoothness
+  - maximum symmetry
+  - maximum texture
 
 ## Analysis
 
@@ -47,6 +49,14 @@ report can be found here:
 <https://github.com/ttimbers/breast_cancer_predictor>.
 
 # Results & Discussion
+
+<img src="../results/predictor_distributions_across_class.png" title="Comparison of the empirical distributions of training data predictors between benign and malignant tumour masses." alt="Comparison of the empirical distributions of training data predictors between benign and malignant tumour masses." width="60%" />
+
+<img src="../results/accuracy_vs_k.png" title="30-fold cross validation classification accuracy as K is varied." alt="30-fold cross validation classification accuracy as K is varied." width="40%" />
+
+trete
+
+0.95
 
 # References
 

@@ -31,22 +31,22 @@ main <- function(train, out_dir) {
     mutate(class = as.factor(class)) %>% 
     pull()
   k = data.frame(k = seq(1, 200, by = 2))
-  cross_val <- trainControl(method="cv", number = 10)
-  model_cv_10fold <- train(x = x_train, y = y_train, method = "knn", tuneGrid = k, trControl = cross_val)
+  cross_val <- trainControl(method="cv", number = 30)
+  model_cv_30fold <- train(x = x_train, y = y_train, method = "knn", tuneGrid = k, trControl = cross_val)
   
   # Visualize accuracy for K's ----------------------------------------------
 
-  accuracy_vs_k <- model_cv_10fold$results %>% 
+  accuracy_vs_k <- model_cv_30fold$results %>% 
     ggplot(aes(x = k, y = Accuracy)) +
       geom_point() +
-      xlab("10-fold cross-validation accuracy")
+      xlab("30-fold cross-validation accuracy")
   try({
     dir.create(out_dir)
   })
   ggsave(paste0(out_dir, "/accuracy_vs_k.png"), width = 4, height = 4)
   
   # Fit final model ---------------------------------------------------------
-  best_k <- model_cv_10fold$result %>% 
+  best_k <- model_cv_30fold$result %>% 
     filter(Accuracy == max(Accuracy)) %>% 
     select(k) %>% 
     pull()
